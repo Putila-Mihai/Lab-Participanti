@@ -1,0 +1,407 @@
+        -:    0:Source:/home/ultra/CLionProjects/lab2_4/service.c
+        -:    0:Graph:/home/ultra/CLionProjects/lab2_4/cmake-build-debug-coverage/CMakeFiles/lab2_4.dir/service.c.gcno
+        -:    0:Data:/home/ultra/CLionProjects/lab2_4/cmake-build-debug-coverage/CMakeFiles/lab2_4.dir/service.c.gcda
+        -:    0:Runs:1
+        -:    1://
+        -:    2:// Created by ultra on 17.03.2023.
+        -:    3://
+        -:    4:#include "service.h"
+        -:    5:#include <stdlib.h>
+        -:    6:#include <string.h>
+        -:    7:#include <assert.h>
+        -:    8:
+        -:    9:
+function addC called 13 returned 100% blocks executed 100%
+       13:   10:int addC(repo *l, char *nume, char *prenume, int scor) {
+       13:   11:    Concurent* c = create_concurent(nume, prenume, scor);
+       13:   11-block  0
+call    0 returned 13
+       13:   12:    int succ = valideaza(*c);
+call    0 returned 13
+       13:   13:    if (succ != 0) {
+branch  0 taken 3 (fallthrough)
+branch  1 taken 10
+        3:   14:        free(c->nume);
+        3:   15:        free(c->prenume);
+        3:   16:        free(c);
+        3:   17:        return succ;
+        3:   17-block  0
+        -:   18:
+        -:   19:    }
+       10:   20:    add(l, c);
+       10:   20-block  0
+call    0 returned 10
+       10:   21:    return 0;
+        -:   22:}
+        -:   23:
+function getAllC called 3 returned 100% blocks executed 100%
+        3:   24:repo* getAllC(repo *l) {
+        3:   25:    return copylist(l,copy_concurent);
+        3:   25-block  0
+call    0 returned 3
+        -:   26:}
+        -:   27:
+function updateS called 1 returned 100% blocks executed 100%
+        1:   28:int updateS(repo *l, char *nume, char *prenume, int scor) {
+        1:   29:    repo* cp = getAllC(l);
+        1:   29-block  0
+call    0 returned 1
+        1:   30:    int ok = 0;
+        3:   31:    for (int i = 0; i < size(cp); i++) {
+        2:   31-block  0
+        3:   31-block  1
+call    0 returned 3
+branch  1 taken 2
+branch  2 taken 1 (fallthrough)
+        2:   32:        Concurent* x = get(cp, i);
+        2:   32-block  0
+call    0 returned 2
+        2:   33:        if (strcmp(x->nume, nume) == 0 && strcmp(x->prenume, prenume) == 0) {
+branch  0 taken 1 (fallthrough)
+branch  1 taken 1
+        1:   33-block  0
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0
+        1:   34:            setscor(l->elements[i], scor);
+        1:   34-block  0
+call    0 returned 1
+        1:   35:            ok = 1;
+        -:   36:        }
+        -:   37:    }
+        1:   38:    free(cp->elements);
+        1:   39:    free(cp);
+        1:   40:    return ok;
+        1:   40-block  0
+        -:   41:
+        -:   42:}
+        -:   43:
+function deleteS called 1 returned 100% blocks executed 100%
+        1:   44:int deleteS(repo *l, char *nume, char *prenume) {
+        1:   45:    repo* cp = getAllC(l);
+        1:   45-block  0
+call    0 returned 1
+        1:   46:    int ok = 0;
+        3:   47:    for (int i = 0; i < size(cp); i++) {
+        2:   47-block  0
+        3:   47-block  1
+call    0 returned 3
+branch  1 taken 2
+branch  2 taken 1 (fallthrough)
+        2:   48:        Concurent* x = get(cp, i);
+        2:   48-block  0
+call    0 returned 2
+        2:   49:        if (strcmp(x->nume, nume) == 0 && strcmp(x->prenume, prenume) == 0) {
+branch  0 taken 1 (fallthrough)
+branch  1 taken 1
+        1:   49-block  0
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0
+        1:   50:            destroy_c(l->elements[i]);
+        1:   50-block  0
+call    0 returned 1
+        2:   51:            for (int k = i; k < size(cp) - 1; k++) {
+        2:   51-block  0
+call    0 returned 2
+branch  1 taken 1
+branch  2 taken 1 (fallthrough)
+        1:   52:                l->elements[k] = l->elements[k + 1];
+        1:   52-block  0
+        -:   53:
+        -:   54:            }
+        1:   55:            ok = 1;
+        1:   56:            l->lengh--;
+        1:   56-block  0
+        -:   57:        }
+        -:   58:
+        -:   59:    }
+        1:   60:    free(cp->elements);
+        1:   61:    free(cp);
+        1:   62:    return ok;
+        1:   62-block  0
+        -:   63:}
+        -:   64:
+function filters called 1 returned 100% blocks executed 100%
+        1:   65:repo* filters(repo *l, int scor) {
+        1:   66:    repo* lista = createEmpty();
+        1:   66-block  0
+call    0 returned 1
+        5:   67:    for (int k = 0; k < size(l); k++) {
+        4:   67-block  0
+        5:   67-block  1
+call    0 returned 5
+branch  1 taken 4
+branch  2 taken 1 (fallthrough)
+        4:   68:        Concurent* c = get(l, k);
+        4:   68-block  0
+call    0 returned 4
+        4:   69:        if (c->scor >= scor) {
+branch  0 taken 1 (fallthrough)
+branch  1 taken 3
+        1:   70:            addC(lista, c->nume, c->prenume, c->scor);
+        1:   70-block  0
+call    0 returned 1
+        -:   71:        }
+        -:   72:    }
+        1:   73:    return lista;
+        1:   73-block  0
+        -:   74:}
+        -:   75:
+function sorts called 1 returned 100% blocks executed 100%
+        1:   76:repo* sorts(repo *l) {
+        1:   77:    repo* sorted = createEmpty();
+        1:   77-block  0
+call    0 returned 1
+        5:   78:    for (int k = 0; k < size(l); k++)
+        5:   78-block  0
+call    0 returned 5
+branch  1 taken 4
+branch  2 taken 1 (fallthrough)
+        4:   79:        addC(sorted, getnume(l->elements[k]), getprenume(l->elements[k]), getscor(l->elements[k]));
+        4:   79-block  0
+call    0 returned 4
+call    1 returned 4
+call    2 returned 4
+call    3 returned 4
+        4:   80:    for (int k = 0; k < size(l) - 1; k++)
+        1:   80-block  0
+        3:   80-block  1
+        4:   80-block  2
+call    0 returned 4
+branch  1 taken 3
+branch  2 taken 1 (fallthrough)
+       12:   81:        for (int j = k; j < size(l); j++) {
+        3:   81-block  0
+        9:   81-block  1
+       12:   81-block  2
+call    0 returned 12
+branch  1 taken 9
+branch  2 taken 3 (fallthrough)
+        9:   82:            if (getscor(sorted->elements[k]) > getscor(sorted->elements[j])) {
+        9:   82-block  0
+call    0 returned 9
+call    1 returned 9
+branch  2 taken 4 (fallthrough)
+branch  3 taken 5
+        4:   83:                Concurent* aux = sorted->elements[k];
+        4:   84:                sorted->elements[k] = sorted->elements[j];
+        4:   85:                sorted->elements[j] = aux;
+        4:   85-block  0
+        -:   86:            }
+        -:   87:        }
+        1:   88:    return sorted;
+        1:   88-block  0
+        -:   89:}
+        -:   90:
+function sort_given called 1 returned 100% blocks executed 100%
+        1:   91:void sort_given(repo *l, FunctieComparare cmp) {
+        4:   92:    for (int i = 0; i < size(l) - 1; i++)
+        1:   92-block  0
+        3:   92-block  1
+        4:   92-block  2
+call    0 returned 4
+branch  1 taken 3
+branch  2 taken 1 (fallthrough)
+        9:   93:        for (int j = i + 1; j < size(l); j++) {
+        3:   93-block  0
+        6:   93-block  1
+        9:   93-block  2
+call    0 returned 9
+branch  1 taken 6
+branch  2 taken 3 (fallthrough)
+        6:   94:            Concurent* c1 = get(l, i);
+        6:   94-block  0
+call    0 returned 6
+        6:   95:            Concurent* c2 = get(l, j);
+call    0 returned 6
+        6:   96:            if (cmp(c1, c2) == 1) {
+call    0 returned 6
+branch  1 taken 6 (fallthrough)
+branch  2 taken 0
+        6:   97:                l->elements[i] = c2;
+        6:   98:                l->elements[j] = c1;
+        6:   98-block  0
+        -:   99:            }
+        -:  100:
+        -:  101:        }
+        -:  102:
+        1:  103:}
+        -:  104:
+function reverse called 7 returned 100% blocks executed 100%
+        7:  105:int reverse(Concurent *c1, Concurent *c2) {
+        7:  106:    if (c1->scor < c2->scor) return 1;
+        7:  106-block  0
+branch  0 taken 6 (fallthrough)
+branch  1 taken 1
+        6:  106-block  1
+        1:  107:    else return 0;
+        1:  107-block  0
+        -:  108:}
+        -:  109:
+function testreverse called 1 returned 100% blocks executed 88%
+        1:  110:void testreverse() {
+        -:  111:    Concurent* c1;
+        -:  112:    Concurent* c2;
+        1:  113:    c1 = create_concurent("Mihai", "alx", 31);
+        1:  113-block  0
+call    0 returned 1
+        1:  114:    c2 = create_concurent("Mihai", "alex", 30);
+call    0 returned 1
+       1*:  115:    assert(reverse(c1, c2) == 0);
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+    %%%%%:  115-block  0
+call    3 never executed
+        1:  116:    destroy_c(c1);
+        1:  116-block  0
+call    0 returned 1
+        1:  117:    destroy_c(c2);
+call    0 returned 1
+        1:  118:}
+        -:  119:
+function testaddC called 1 returned 100% blocks executed 75%
+        1:  120:void testaddC() {
+        1:  121:    repo* l = createEmpty();
+        1:  121-block  0
+call    0 returned 1
+        -:  122:    //invalid
+        1:  123:    int error = addC(l, "", "b", 10);
+call    0 returned 1
+       1*:  124:    assert(error != 0);
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+    %%%%%:  124-block  0
+call    2 never executed
+       1*:  125:    assert(size(l) == 0);
+        1:  125-block  0
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+    %%%%%:  125-block  1
+call    3 never executed
+        -:  126:
+        1:  127:    error = addC(l, "a", "", 10);
+        1:  127-block  0
+call    0 returned 1
+       1*:  128:    assert(error != 0);
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+    %%%%%:  128-block  0
+call    2 never executed
+       1*:  129:    assert(size(l) == 0);
+        1:  129-block  0
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+    %%%%%:  129-block  1
+call    3 never executed
+        -:  130://
+        1:  131:    error = addC(l, "a", "b", 1001);
+        1:  131-block  0
+call    0 returned 1
+       1*:  132:    assert(error != 0);
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+    %%%%%:  132-block  0
+call    2 never executed
+       1*:  133:    assert(size(l) == 0);
+        1:  133-block  0
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+    %%%%%:  133-block  1
+call    3 never executed
+        -:  134:    //valid
+        1:  135:    addC(l, "a", "b", 20);
+        1:  135-block  0
+call    0 returned 1
+        1:  136:    addC(l, "a2", "b2", 40);
+call    0 returned 1
+        1:  137:    repo* l2 = getAllC(l);
+call    0 returned 1
+       1*:  138:    assert(size(l2) == 2);
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+    %%%%%:  138-block  0
+call    3 never executed
+       1*:  139:    assert(getscor(l->elements[0]) == 20);
+        1:  139-block  0
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+    %%%%%:  139-block  1
+call    3 never executed
+        -:  140:    //test update
+       1*:  141:    assert(updateS(l, "a", "b", 30) == 1);
+        1:  141-block  0
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+    %%%%%:  141-block  1
+call    3 never executed
+       1*:  142:    assert(getscor(get(l, 0)) == 30);
+        1:  142-block  0
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 0 (fallthrough)
+branch  3 taken 1
+    %%%%%:  142-block  1
+call    4 never executed
+        -:  143:    //test delete
+       1*:  144:    assert(deleteS(l, "a", "b") == 1);
+        1:  144-block  0
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+    %%%%%:  144-block  1
+call    3 never executed
+       1*:  145:    assert(size(l) == 1);
+        1:  145-block  0
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+    %%%%%:  145-block  1
+call    3 never executed
+        1:  146:    addC(l, "a2", "b23", 80);
+        1:  146-block  0
+call    0 returned 1
+        1:  147:    addC(l, "a2", "b24", 48);
+call    0 returned 1
+        1:  148:    addC(l, "a2", "b25", 23);
+call    0 returned 1
+        1:  149:    repo* t = filters(l, 70);
+call    0 returned 1
+       1*:  150:    assert(getscor(t->elements[0]) == 80);
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+    %%%%%:  150-block  0
+call    3 never executed
+        1:  151:    repo* sort = sorts(l);
+        1:  151-block  0
+call    0 returned 1
+       1*:  152:    assert(getscor(sort->elements[3]) == 80);
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+    %%%%%:  152-block  0
+call    3 never executed
+        1:  153:    sort_given(sort, reverse);
+        1:  153-block  0
+call    0 returned 1
+       1*:  154:    assert(getscor(sort->elements[0]) == 80);
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+    %%%%%:  154-block  0
+call    3 never executed
+        1:  155:    destroy(l,destroy_c);
+        1:  155-block  0
+call    0 returned 1
+        1:  156:    free(l2->elements);
+        1:  157:    destroy(sort,destroy_c);
+call    0 returned 1
+        1:  158:    destroy(t,destroy_c);
+call    0 returned 1
+        1:  159:}

@@ -1,0 +1,285 @@
+        -:    0:Source:/home/ultra/CLionProjects/lab2_4/main.c
+        -:    0:Graph:/home/ultra/CLionProjects/lab2_4/cmake-build-debug-coverage/CMakeFiles/lab2_4.dir/main.c.gcno
+        -:    0:Data:/home/ultra/CLionProjects/lab2_4/cmake-build-debug-coverage/CMakeFiles/lab2_4.dir/main.c.gcda
+        -:    0:Runs:1
+        -:    1:#include <stdio.h>
+        -:    2:#include <stdlib.h>
+        -:    3:#include "entities.h"
+        -:    4:#include "repo.h"
+        -:    5:#include "service.h"
+        -:    6:
+function testall called 1 returned 100% blocks executed 100%
+        1:    7:void testall() {
+        1:    8:    test_CreateDestroy();
+        1:    8-block  0
+call    0 returned 1
+        1:    9:    testCreateList();
+call    0 returned 1
+        1:   10:    testIterateList();
+call    0 returned 1
+        1:   11:    testCopyList();
+call    0 returned 1
+        1:   12:    testaddC();
+call    0 returned 1
+        1:   13:    testreverse();
+call    0 returned 1
+        1:   14:    test_getset();
+call    0 returned 1
+        1:   15:    test_lista_liste();
+call    0 returned 1
+        1:   16:}
+        -:   17:
+        -:   18:/*
+        -:   19: * read and add and participant repo
+        -:   20: * l: the list of participants
+        -:   21: */
+function readconcurent called 0 returned 0% blocks executed 0%
+    #####:   22:void readconcurent(repo *l) {
+    #####:   23:    printf("Numele:");
+    %%%%%:   23-block  0
+call    0 never executed
+    #####:   24:    char *nume = (char *) malloc(30 * sizeof(char));
+    #####:   25:    scanf("%s", nume);
+call    0 never executed
+    #####:   26:    printf("Prenumele:");
+call    0 never executed
+    #####:   27:    char *prenume = (char *) malloc(30 * sizeof(char));
+    #####:   28:    scanf("%s", prenume);
+call    0 never executed
+        -:   29:    int scor;
+    #####:   30:    printf("Scorul este");
+call    0 never executed
+    #####:   31:    scanf("%d", &scor);
+call    0 never executed
+        -:   32:
+    #####:   33:    int error = addC(l, nume, prenume, scor);
+call    0 never executed
+    #####:   34:    if (error != 0) {
+branch  0 never executed
+branch  1 never executed
+    #####:   35:        printf("Concurent invalid\n");
+    %%%%%:   35-block  0
+call    0 never executed
+        -:   36:    } else {
+    #####:   37:        printf("Concurent adaugat\n");
+    %%%%%:   37-block  0
+call    0 never executed
+        -:   38:    }
+    #####:   39:    free(nume);
+    #####:   40:    free(prenume);
+    #####:   41:}
+        -:   42:
+        -:   43:/*
+        -:   44: * print all participants
+        -:   45: * l: the list of participants
+        -:   46: *
+        -:   47: */
+function printall called 0 returned 0% blocks executed 0%
+    #####:   48:void printall(repo *l) {
+    #####:   49:    printf("Concurenti: \n");
+    %%%%%:   49-block  0
+call    0 never executed
+    #####:   50:    for (int i = 0; i < size(l); i++) {
+    %%%%%:   50-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:   51:        Concurent* c = get(l, i);
+    %%%%%:   51-block  0
+call    0 never executed
+    #####:   52:        printf("Nume:%s, Prenume:%s, Scor:%d \n", c->nume, c->prenume, c->scor);
+call    0 never executed
+        -:   53:    }
+    #####:   54:}
+        -:   55:
+        -:   56:/*
+        -:   57: * update a participant from the list
+        -:   58: * l: the list of participants
+        -:   59: */
+function update called 0 returned 0% blocks executed 0%
+    #####:   60:void update(repo *l) {
+    #####:   61:    printf("Introduceti: Numele: ");
+    %%%%%:   61-block  0
+call    0 never executed
+    #####:   62:    char *nume = (char *) malloc(30 * sizeof(char));
+    #####:   63:    char *prenume = (char *) malloc(30 * sizeof(char));
+        -:   64:    int scor;
+    #####:   65:    scanf("%s", nume);
+call    0 never executed
+    #####:   66:    printf("Prenume: ");
+call    0 never executed
+    #####:   67:    scanf("%s", prenume);
+call    0 never executed
+    #####:   68:    printf("Scor: ");
+call    0 never executed
+    #####:   69:    scanf("%d", &scor);
+call    0 never executed
+    #####:   70:    if (updateS(l, nume, prenume, scor) == 1) {
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:   71:        printf("\nConcurent modificat cu succes\n");
+    %%%%%:   71-block  0
+call    0 never executed
+        -:   72:    } else {
+    #####:   73:        printf("\nConcurent inexistent\n");
+    %%%%%:   73-block  0
+call    0 never executed
+        -:   74:    }
+    #####:   75:    free(nume);
+    #####:   76:    free(prenume);
+    #####:   77:}
+        -:   78:
+        -:   79:/*
+        -:   80: * delete a participant from the list
+        -:   81: * l: the list of participants
+        -:   82: */
+function delete called 0 returned 0% blocks executed 0%
+    #####:   83:void delete(repo *l) {
+    #####:   84:    printf("Introduceti: Numele: ");
+    %%%%%:   84-block  0
+call    0 never executed
+    #####:   85:    char *nume = (char *) malloc(30 * sizeof(char));
+    #####:   86:    char *prenume = (char *) malloc(30 * sizeof(char));
+    #####:   87:    scanf("%s", nume);
+call    0 never executed
+    #####:   88:    printf("Prenume: ");
+call    0 never executed
+    #####:   89:    scanf("%s", prenume);
+call    0 never executed
+    #####:   90:    if (deleteS(l, nume, prenume) == 1) {
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:   91:        printf("\nConcurent sters cu succes\n");
+    %%%%%:   91-block  0
+call    0 never executed
+        -:   92:    } else {
+    #####:   93:        printf("\nConcurent inexistent\n");
+    %%%%%:   93-block  0
+call    0 never executed
+        -:   94:    }
+    #####:   95:    free(nume);
+    #####:   96:    free(prenume);
+    #####:   97:}
+        -:   98:
+        -:   99:/*
+        -:  100: * afiseaza concurentii care au obtinut un scor mai mare decat un numar  dat
+        -:  101: * l: lista de concurenti
+        -:  102: */
+function filter called 0 returned 0% blocks executed 0%
+    #####:  103:void filter(repo *l) {
+        -:  104:    int scor;
+    #####:  105:    printf("Scorul minim:  ");
+    %%%%%:  105-block  0
+call    0 never executed
+    #####:  106:    scanf("%d", &scor);
+call    0 never executed
+    #####:  107:    repo* filtered = filters(l, scor);
+call    0 never executed
+    #####:  108:    printall(filtered);
+call    0 never executed
+    #####:  109:    destroy(filtered,destroy_c);
+call    0 never executed
+    #####:  110:}
+        -:  111:/*
+        -:  112: * sorteaza lista de concurenti in ordine crescatoare a scorului
+        -:  113: */
+function sort called 0 returned 0% blocks executed 0%
+    #####:  114:void sort(repo *l) {
+    #####:  115:    repo* sorted = sorts(l);
+    %%%%%:  115-block  0
+call    0 never executed
+    #####:  116:    printall(sorted);
+call    0 never executed
+    #####:  117:    destroy(sorted,destroy_c);
+call    0 never executed
+    #####:  118:}
+        -:  119:
+function run called 1 returned 100% blocks executed 42%
+        1:  120:void run() {
+        1:  121:    repo* repository = createEmpty();
+        1:  121-block  0
+call    0 returned 1
+        1:  122:    int ok = 1;
+        2:  123:    while (ok) {
+        2:  123-block  0
+branch  0 taken 1
+branch  1 taken 1 (fallthrough)
+        1:  124:        printf("[0]Exit | [1]Adauga concurent | [2]Afisare concurenti | [3]Actualizare concurent |[4]Elimina concurent [5]Filtru [6]Sort\n");
+        1:  124-block  0
+call    0 returned 1
+        1:  125:        printf("Comanda este:  ");
+call    0 returned 1
+        -:  126:        int cmd;
+        1:  127:        scanf("%d", &cmd);
+call    0 returned 1
+        1:  128:        switch (cmd) {
+branch  0 taken 0
+branch  1 taken 0
+branch  2 taken 0
+branch  3 taken 0
+branch  4 taken 0
+branch  5 taken 0
+branch  6 taken 0
+branch  7 taken 1
+branch  8 taken 0
+    #####:  129:            case 1:
+    #####:  130:                readconcurent(repository);
+    %%%%%:  130-block  0
+call    0 never executed
+    #####:  131:                break;
+    #####:  132:            case 2:
+    #####:  133:                printall(repository);
+    %%%%%:  133-block  0
+call    0 never executed
+    #####:  134:                break;
+    #####:  135:            case 3:
+    #####:  136:                update(repository);
+    %%%%%:  136-block  0
+call    0 never executed
+    #####:  137:                break;
+    #####:  138:            case 4:
+    #####:  139:                delete(repository);
+    %%%%%:  139-block  0
+call    0 never executed
+    #####:  140:                break;
+    #####:  141:            case 5:
+    #####:  142:                filter(repository);
+    %%%%%:  142-block  0
+call    0 never executed
+    #####:  143:                break;
+    #####:  144:            case 6:
+    #####:  145:                sort(repository);
+    %%%%%:  145-block  0
+call    0 never executed
+    #####:  146:                break;
+    #####:  147:            case 7:
+    #####:  148:                sort_given(repository,&reverse);
+    %%%%%:  148-block  0
+call    0 never executed
+    #####:  149:                break;
+        1:  150:            case 0:
+        1:  151:                destroy(repository,destroy_c);
+        1:  151-block  0
+call    0 returned 1
+        1:  152:                ok = 0;
+        1:  153:                break;
+    #####:  154:            default:
+    #####:  155:                printf("Comanda invalida!\n");
+    %%%%%:  155-block  0
+call    0 never executed
+        -:  156:        }
+        -:  157:
+        -:  158:    }
+        1:  159:}
+        -:  160:
+function main called 1 returned 100% blocks executed 100%
+        1:  161:int main() {
+        1:  162:    testall();
+        1:  162-block  0
+call    0 returned 1
+        1:  163:    run();
+call    0 returned 1
+        1:  164:    return 0;
+        -:  165:}
