@@ -1,0 +1,185 @@
+        -:    0:Source:/home/ultra/CLionProjects/lab2_4/entities.c
+        -:    0:Graph:/home/ultra/CLionProjects/lab2_4/cmake-build-debug-coverage/CMakeFiles/lab2_4.dir/entities.c.gcno
+        -:    0:Data:/home/ultra/CLionProjects/lab2_4/cmake-build-debug-coverage/CMakeFiles/lab2_4.dir/entities.c.gcda
+        -:    0:Runs:1
+        -:    1://
+        -:    2:// Created by ultra on 17.03.2023.
+        -:    3://
+        -:    4:#include "entities.h"
+        -:    5:#include <stdlib.h>
+        -:    6:#include <string.h>
+        -:    7:#include <assert.h>
+        -:    8:
+function create_concurent called 54 returned 100% blocks executed 100%
+       54:    9:Concurent* create_concurent(char *nume, char *prenume, int scor) {
+       54:   10:    Concurent *rez = malloc(sizeof(Concurent));
+       54:   11:    int nr = strlen(nume);
+       54:   12:    rez->nume = malloc(nr * sizeof(char));
+       54:   13:    strcpy(rez->nume, nume);
+       54:   14:    nr = strlen(prenume);
+       54:   15:    rez->prenume = malloc(nr * sizeof(char));
+       54:   16:    strcpy(rez->prenume, prenume);
+       54:   17:    rez->scor = scor;
+       54:   18:    return rez;
+       54:   18-block  0
+        -:   19:}
+        -:   20:
+        -:   21:
+function test_CreateDestroy called 1 returned 100% blocks executed 67%
+        1:   22:void test_CreateDestroy() {
+        1:   23:    Concurent* c = create_concurent("Mihai", "alex", 30);
+        1:   23-block  0
+call    0 returned 1
+       1*:   24:    assert(strcmp(c->nume, "Mihai") == 0);
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+    %%%%%:   24-block  0
+call    2 never executed
+       1*:   25:    assert(strcmp(c->prenume, "alex") == 0);
+        1:   25-block  0
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+    %%%%%:   25-block  1
+call    2 never executed
+       1*:   26:    assert(c->scor == 30);
+        1:   26-block  0
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+    %%%%%:   26-block  1
+call    2 never executed
+        1:   27:    destroy_c(c);
+        1:   27-block  0
+call    0 returned 1
+        1:   28:}
+        -:   29:
+function valideaza called 12 returned 100% blocks executed 100%
+       12:   30:int valideaza(Concurent p) {
+       12:   31:    if (strlen(p.nume) == 0) {
+       12:   31-block  0
+branch  0 taken 1 (fallthrough)
+branch  1 taken 11
+        1:   32:        return 1;
+        1:   32-block  0
+        -:   33:    }
+       11:   34:    if (strlen(p.prenume) == 0) {
+       11:   34-block  0
+branch  0 taken 1 (fallthrough)
+branch  1 taken 10
+        1:   35:        return 2;
+        1:   35-block  0
+        -:   36:    }
+       10:   37:    if (p.scor > 100 || p.scor < 0) {
+       10:   37-block  0
+branch  0 taken 9 (fallthrough)
+branch  1 taken 1
+        9:   37-block  1
+branch  2 taken 0 (fallthrough)
+branch  3 taken 9
+        1:   38:        return 3;
+        1:   38-block  0
+        -:   39:    }
+        9:   40:    return 0;
+        9:   40-block  0
+        -:   41:}
+        -:   42:
+function destroy_c called 44 returned 100% blocks executed 100%
+       44:   43:void destroy_c(Concurent *c) {
+       44:   44:    free(c->nume);
+       44:   45:    free(c->prenume);
+       44:   46:    free(c);
+       44:   47:}
+function getscor called 30 returned 100% blocks executed 100%
+       30:   48:int getscor(Concurent *p) {
+       30:   49:    return p->scor;
+       30:   49-block  0
+        -:   50:}
+        -:   51:
+function getnume called 9 returned 100% blocks executed 100%
+        9:   52:char* getnume(Concurent *p) {
+        9:   53:    return p->nume;
+        9:   53-block  0
+        -:   54:}
+        -:   55:
+function getprenume called 6 returned 100% blocks executed 100%
+        6:   56:char* getprenume(Concurent *p) {
+        6:   57:    return p->prenume;
+        6:   57-block  0
+        -:   58:}
+        -:   59:
+function setscor called 2 returned 100% blocks executed 100%
+        2:   60:void setscor(Concurent *p, int scor) {
+        2:   61:    p->scor = scor;
+        2:   62:}
+function setnume called 1 returned 100% blocks executed 100%
+        1:   63:void setnume(Concurent* p,char* nume){
+        1:   64:    strcpy(getnume(p),nume);
+        1:   64-block  0
+call    0 returned 1
+        1:   65:}
+        -:   66:
+function setprenume called 1 returned 100% blocks executed 100%
+        1:   67:void setprenume(Concurent* p,char* prenume){
+        1:   68:    strcpy(p->prenume, prenume);
+        1:   69:}
+function test_getset called 1 returned 100% blocks executed 75%
+        1:   70:void test_getset(){
+        1:   71:    Concurent *c = create_concurent("Mihai", "alex", 30);
+        1:   71-block  0
+call    0 returned 1
+       1*:   72:    assert(strcmp(getnume(c),"Mihai")==0);
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+    %%%%%:   72-block  0
+call    3 never executed
+       1*:   73:    assert(strcmp(getprenume(c),"alex")==0);
+        1:   73-block  0
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+    %%%%%:   73-block  1
+call    3 never executed
+       1*:   74:    assert(getscor(c)==30);
+        1:   74-block  0
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+    %%%%%:   74-block  1
+call    3 never executed
+        1:   75:    setnume(c,"ale");
+        1:   75-block  0
+call    0 returned 1
+        1:   76:    setprenume(c,"ema");
+call    0 returned 1
+        1:   77:    setscor(c,50);
+call    0 returned 1
+       1*:   78:    assert(strcmp(getnume(c),"ale")==0);
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+    %%%%%:   78-block  0
+call    3 never executed
+       1*:   79:    assert(strcmp(getprenume(c),"ema")==0);
+        1:   79-block  0
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+    %%%%%:   79-block  1
+call    3 never executed
+       1*:   80:    assert(getscor(c)==50);
+        1:   80-block  0
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+    %%%%%:   80-block  1
+call    3 never executed
+        1:   81:    destroy_c(c);
+        1:   81-block  0
+call    0 returned 1
+        1:   82:}
+function copy_concurent called 27 returned 100% blocks executed 100%
+       27:   83:Concurent* copy_concurent(Concurent* c){
+       27:   84:    return create_concurent(c->nume,c->prenume,c->scor);
+       27:   84-block  0
+call    0 returned 27
+        -:   85:}

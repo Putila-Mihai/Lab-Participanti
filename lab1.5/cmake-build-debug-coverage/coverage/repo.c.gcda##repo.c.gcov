@@ -1,0 +1,236 @@
+        -:    0:Source:/home/ultra/CLionProjects/lab2_4/repo.c
+        -:    0:Graph:/home/ultra/CLionProjects/lab2_4/cmake-build-debug-coverage/CMakeFiles/lab2_4.dir/repo.c.gcno
+        -:    0:Data:/home/ultra/CLionProjects/lab2_4/cmake-build-debug-coverage/CMakeFiles/lab2_4.dir/repo.c.gcda
+        -:    0:Runs:1
+        -:    1://
+        -:    2:// Created by ultra on 17.03.2023.
+        -:    3://
+        -:    4:#include "repo.h"
+        -:    5:
+        -:    6:#include <assert.h>
+        -:    7:#include <string.h>
+        -:    8:#include<stdlib.h>
+        -:    9:
+        -:   10:/*
+        -:   11: * create an empty list
+        -:   12: */
+function createEmpty called 35 returned 100% blocks executed 100%
+       35:   13:repo* createEmpty() {
+       35:   14:    repo* rez =malloc(sizeof(repo));
+       35:   15:    rez->elements = (TElem *) malloc(30 * sizeof(TElem));
+       35:   16:    rez->lengh = 0;
+       35:   17:    return rez;
+       35:   17-block  0
+        -:   18:}
+        -:   19:
+        -:   20:/*
+        -:   21: * destroy the list
+        -:   22: */
+function destroy called 29 returned 100% blocks executed 100%
+       29:   23:void destroy(repo *l,DestroyFunction destFct) {
+       79:   24:    for(int i=0;i<size(l);i++)
+       29:   24-block  0
+       79:   24-block  1
+call    0 returned 79
+branch  1 taken 50
+branch  2 taken 29 (fallthrough)
+        -:   25:    {
+       50:   26:        destFct((l->elements[i]));
+       50:   26-block  0
+call    0 returned 50
+        -:   27:    }
+       29:   28:    free(l->elements);
+       29:   29:    l->lengh = 0;
+       29:   30:}
+        -:   31:
+function size called 190 returned 100% blocks executed 100%
+      190:   32:int size(repo *l) {
+      190:   33:    return l->lengh;
+      190:   33-block  0
+        -:   34:}
+        -:   35:
+function add called 60 returned 100% blocks executed 100%
+       60:   36:void add(repo *l, TElem el) {
+       60:   37:    l->elements[l->lengh] = el;
+       60:   38:    l->lengh++;
+       60:   39:}
+        -:   40:
+function get called 51 returned 100% blocks executed 100%
+       51:   41:TElem get(repo *l, int poz) {
+       51:   42:    return l->elements[poz];
+       51:   42-block  0
+        -:   43:}
+        -:   44:
+function copylist called 17 returned 100% blocks executed 100%
+       17:   45:repo* copylist(repo *l,CopyFct copy) {
+       17:   46:    repo* rez = createEmpty();
+       17:   46-block  0
+call    0 returned 17
+       44:   47:    for (int i = 0; i < size(l); i++) {
+       44:   47-block  0
+call    0 returned 44
+branch  1 taken 27
+branch  2 taken 17 (fallthrough)
+       27:   48:        TElem c = get(l, i);
+       27:   48-block  0
+call    0 returned 27
+       27:   49:        add(rez, copy(c));
+call    0 returned 27
+call    1 returned 27
+        -:   50:    }
+       17:   51:    return rez;
+       17:   51-block  0
+        -:   52:}
+        -:   53:
+function destroy_lista called 16 returned 100% blocks executed 100%
+       16:   54:void destroy_lista(repo* l){
+       16:   55:    destroy(l,destroy_c);
+       16:   55-block  0
+call    0 returned 16
+       16:   56:}
+        -:   57:
+function removelast called 3 returned 100% blocks executed 100%
+        3:   58:TElem removelast(repo* l){
+        3:   59:    TElem rez= l->elements[l->lengh -1 ];
+        3:   60:    l->lengh -=1;
+        3:   61:    return rez;
+        3:   61-block  0
+        -:   62:}
+        -:   63:
+function testCopyList called 1 returned 100% blocks executed 86%
+        1:   64:void testCopyList() {
+        1:   65:    repo* l = createEmpty();
+        1:   65-block  0
+call    0 returned 1
+        1:   66:    add(l, create_concurent("a", "b", 20));
+call    0 returned 1
+call    1 returned 1
+        1:   67:    add(l, create_concurent("c", "d", 30));
+call    0 returned 1
+call    1 returned 1
+        1:   68:    repo* l2 = copylist(l,copy_concurent);
+call    0 returned 1
+       1*:   69:    assert(size(l2) == 2);
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+    %%%%%:   69-block  0
+call    3 never executed
+        1:   70:    Concurent* c = get(l2, 1);
+        1:   70-block  0
+call    0 returned 1
+       1*:   71:    assert(c->scor == 30);
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+    %%%%%:   71-block  0
+call    2 never executed
+        1:   72:    destroy(l,destroy_c);
+        1:   72-block  0
+call    0 returned 1
+        1:   73:    free(l2->elements);
+        1:   74:    free(l2);
+        -:   75:
+        1:   76:}
+        -:   77:
+function testCreateList called 1 returned 100% blocks executed 83%
+        1:   78:void testCreateList() {
+        1:   79:    repo* l = createEmpty();
+        1:   79-block  0
+call    0 returned 1
+       1*:   80:    assert(size(l) == 0);
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+    %%%%%:   80-block  0
+call    3 never executed
+        1:   81:    destroy(l,destroy_c);
+        1:   81-block  0
+call    0 returned 1
+        1:   82:}
+function test_lista_liste called 1 returned 100% blocks executed 88%
+        1:   83:void test_lista_liste(){
+        1:   84:    repo* concurenti =createEmpty();
+        1:   84-block  0
+call    0 returned 1
+        1:   85:    add(concurenti, create_concurent("Mihai","alex",22));
+call    0 returned 1
+call    1 returned 1
+        1:   86:    add(concurenti, create_concurent("ema","ale",23));
+call    0 returned 1
+call    1 returned 1
+        1:   87:    repo* concurenti2 = createEmpty();
+call    0 returned 1
+        1:   88:    repo* undo_list = createEmpty();
+call    0 returned 1
+        1:   89:    add(undo_list,concurenti);
+call    0 returned 1
+       1*:   90:    assert(size(undo_list)==1);
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+    %%%%%:   90-block  0
+call    3 never executed
+        1:   91:    add(undo_list,concurenti2);
+        1:   91-block  0
+call    0 returned 1
+       1*:   92:    assert(size(undo_list)==2);
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+    %%%%%:   92-block  0
+call    3 never executed
+        1:   93:    destroy(undo_list,destroy_lista);
+        1:   93-block  0
+call    0 returned 1
+        -:   94:
+        1:   95:}
+function testIterateList called 1 returned 100% blocks executed 75%
+        1:   96:void testIterateList() {
+        1:   97:    repo* l = createEmpty();
+        1:   97-block  0
+call    0 returned 1
+        1:   98:    add(l, create_concurent("a", "b", 20));
+call    0 returned 1
+call    1 returned 1
+        1:   99:    add(l, create_concurent("c", "d", 30));
+call    0 returned 1
+call    1 returned 1
+       1*:  100:    assert(size(l) == 2);
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+    %%%%%:  100-block  0
+call    3 never executed
+        1:  101:    Concurent* c = l->elements[0];
+        1:  102:    Concurent* b = removelast(l);
+        1:  102-block  0
+call    0 returned 1
+       1*:  103:    assert(b->scor == 30);
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+    %%%%%:  103-block  0
+call    2 never executed
+       1*:  104:    assert(strcmp(c->nume, "a") == 0);
+        1:  104-block  0
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+    %%%%%:  104-block  1
+call    2 never executed
+        1:  105:    c = l->elements[1];
+       1*:  106:    assert(strcmp(c->prenume, "d") == 0);
+        1:  106-block  0
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+    %%%%%:  106-block  1
+call    2 never executed
+        1:  107:    destroy(l,destroy_c);
+        1:  107-block  0
+call    0 returned 1
+       1*:  108:    assert(size(l) == 0);
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+    %%%%%:  108-block  0
+call    3 never executed
+        -:  109:
+        1:  110:}
